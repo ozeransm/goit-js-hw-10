@@ -14,16 +14,20 @@ body {
 ul{
   list-style: none;
 }
-.country-list span{
-  padding-left: 20px;
+.country-list img{
+  margin-right: 20px;
 } 
+.country-info h1{
+   display: inline;
+   margin-left: 20px; 
+}
+.country-info span{
+  font-weight: 700;
+  font-size: 20px;
+}
 #search-box {
   font: inherit;
   padding: 8px;
   max-width: 320px;
   margin-bottom: 16px;
-}
-
-.country-list-link{
-  
 }

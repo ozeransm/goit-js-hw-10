@@ -1,12 +1,13 @@
-import './css/styles.css';
+
 import debounce from 'lodash.debounce';
 import {fetchCountries} from '../src/fetchCountries';
 import Notiflix from 'notiflix';
+import './css/styles.css';
 
 const refs = {
     input: document.querySelector('#search-box'),
     list: document.querySelector('.country-list'),
-    card: document.querySelector('country-info'),
+    card: document.querySelector('.country-info'),
     
 }
 const DEBOUNCE_DELAY = 300;
@@ -16,7 +17,7 @@ refs.input.addEventListener('input',debounce(handleInput, DEBOUNCE_DELAY));
 function handleInput(e){
     const nameCountry = e.target.value.trim();
     refs.list.textContent='';
-    // refs.card.textContent='';
+    refs.card.textContent='';
     if(!nameCountry){
         return false;
     }
@@ -50,8 +51,9 @@ function resolveFetch(nameCountry, strong){
 }
 
 function markupCardCountry({flags, name, capital, languages, population}){
-    const markupCard = `<img src="${flags.svg}" width="50px" ><h1>${name.common}</h1><p>${capital}</p><p>${Object.values(languages)}</p>${population}<p></p>`;
-    refs.list.insertAdjacentHTML('afterbegin', markupCard);
+    const markupCard = `<img src="${flags.svg}" width="50px" ><h1>${name.common}</h1><p><span>Capital: </span>${capital}</p><p><span>Population: </span>${population}</p><p><span>Languages: </span>${Object.values(languages)}</p>`;
+    refs.card.insertAdjacentHTML('afterbegin', markupCard);
+    
     // console.log(capital.reduce((akk,el)=>akk+`, ${el}`),'');
     
 }
