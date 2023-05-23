@@ -23,17 +23,10 @@ function handleInput(e){
     }
 
     resolveFetch(nameCountry, 0);
-    
-
 }
 
 function resolveFetch(nameCountry, strong){
     fetchCountries(nameCountry, strong)
-    .then(res =>{
-        if(!res.ok){
-            throw new Error(res.statusText);
-        };          
-    return res.json()})
     .then(data =>{
         if(data.length>10){
             Notiflix.Notify.success("Too many matches found. Please enter a more specific name.");
@@ -50,12 +43,13 @@ function resolveFetch(nameCountry, strong){
     .catch((err)=>Notiflix.Notify.failure(`Oops, there is no country with that name ${err.toString()}`));
 }
 
+// err.message.find('404') ? 'Oops, there is no country with that name' : err.toString()
+// `Oops, there is no country with that name ${err.toString()}`
 function markupCardCountry({flags, name, capital, languages, population}){
-    const markupCard = `<img src="${flags.svg}" width="50px" ><h1>${name.common}</h1><p><span>Capital: </span>${capital}</p><p><span>Population: </span>${population}</p><p><span>Languages: </span>${Object.values(languages)}</p>`;
+    const markupCard = `<img src="${flags.svg}" width="50px" ><h1>${name.common}</h1><p><span>Capital: </span>${capital}</p><p><span>Population: </span>${population}</p><p><span>Languages: </span>${Object.values(languages).join(', ')}</p>`;
     refs.card.insertAdjacentHTML('afterbegin', markupCard);
     
-    // console.log(capital.reduce((akk,el)=>akk+`, ${el}`),'');
-    
+       
 }
 
 function markupList(data){
